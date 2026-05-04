@@ -1,0 +1,33 @@
+{
+  "config": {
+    "n_per_cluster": 250,
+    "n_noise": 60,
+    "seed": 42
+  },
+  "metrics": [
+    {
+      "model": "K-means (k=3)",
+      "k_found": 3,
+      "noise_found": 0,
+      "ari": 0.7638926494524498,
+      "nmi": 0.7433115727031679,
+      "silhouette": 0.6926310378086636
+    },
+    {
+      "model": "DBSCAN (\u03b5=0.7)",
+      "k_found": 3,
+      "noise_found": 89,
+      "ari": 0.8925548043028468,
+      "nmi": 0.8571860656508933,
+      "silhouette": 0.773636059974125
+    },
+    {
+      "model": "Agglomerative (ward, k=3)",
+      "k_found": 3,
+      "noise_found": 0,
+      "ari": 0.8850983438054721,
+      "nmi": 0.8557669076394748,
+      "silhouette": 0.6778267991814924
+    }
+  ]
+}
