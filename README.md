@@ -17,31 +17,12 @@
 
 > Cluster a 2-D dataset that mixes two round Gaussian blobs, one **elongated anisotropic blob** that breaks K-means' equal-axis assumption, and a sparse band of **uniform-noise outliers**. Score against the ground-truth labels with Adjusted Rand Index — a luxury real unsupervised tasks don't give you.
 
-<table>
-<tr>
-<td align="center" width="33%">
-<sub>K-means (k=3)</sub><br>
-<b style="font-size:1.5em; color:#7A7A7A;">ARI 0.764</b><br>
-<sub>shears the elongated cluster</sub>
-</td>
-<td align="center" width="33%">
-<sub>DBSCAN (ε=0.7)</sub><br>
-<b style="font-size:1.5em; color:#3B6EA8;">ARI 0.893</b><br>
-<sub>+ correctly flags 89 outliers</sub>
-</td>
-<td align="center" width="33%">
-<sub>Agglomerative (ward)</sub><br>
-<b style="font-size:1.5em; color:#3B6EA8;">ARI 0.885</b><br>
-<sub>but absorbs noise into clusters</sub>
-</td>
-</tr>
-</table>
-
-| Algorithm | Clusters found | Noise flagged | ARI | NMI | Silhouette |
-|---|:---:|:---:|---:|---:|---:|
-| K-means (k=3) | 3 | 0 | 0.764 | 0.743 | **0.693** |
-| **DBSCAN (ε=0.7, min_samples=10)** | **3** | **89** | **0.893** | **0.857** | **0.774** |
-| Agglomerative (ward, k=3) | 3 | 0 | 0.885 | 0.856 | 0.678 |
+<p align="center">
+  <img src="https://img.shields.io/badge/Best_ARI-0.893-3B6EA8?style=for-the-badge" alt="Best ARI 0.893">
+  <img src="https://img.shields.io/badge/Best_NMI-0.857-3B6EA8?style=for-the-badge" alt="Best NMI 0.857">
+  <img src="https://img.shields.io/badge/Best_Silhouette-0.774-3B6EA8?style=for-the-badge" alt="Best Silhouette 0.774">
+</p>
+<p align="center"><sub>ARI &amp; NMI &rarr; <b>DBSCAN</b> (&epsilon; = 0.7)&nbsp;&middot;&nbsp;Silhouette &rarr; <b>DBSCAN</b> (&epsilon; = 0.7)&nbsp;&middot;&nbsp;external metrics require ground-truth labels (synthetic-data advantage)</sub></p>
 
 <sub>**Headline finding:** the elongated cluster reveals each algorithm's bias. K-means commits to spherical clusters and slices the long blob in two; DBSCAN follows the actual density and additionally separates the uniform-noise band as outliers; Agglomerative gets the partition right but, like K-means, has no concept of "noise" so it forces the outliers into one of the three clusters.</sub>
 
@@ -89,6 +70,38 @@ Total dataset size: **810 points** (750 cluster + 60 noise).
 ---
 
 ## Dashboard
+
+### Algorithm scorecard
+
+<table>
+<tr><th align="left">Algorithm</th><th>ARI</th><th>NMI</th><th>Silhouette</th><th>k found</th><th>Noise flagged</th></tr>
+<tr>
+  <td><b>K-means</b> <sub>k = 3</sub></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.764-7A7A7A?style=flat-square" alt="0.764"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.743-7A7A7A?style=flat-square" alt="0.743"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.693-7A7A7A?style=flat-square" alt="0.693"></td>
+  <td align="center"><img src="https://img.shields.io/badge/3-7A7A7A?style=flat-square" alt="3"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0-C04040?style=flat-square" alt="0 none detected"></td>
+</tr>
+<tr>
+  <td><b>DBSCAN</b> <sub>&epsilon; = 0.7</sub></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.893-3B6EA8?style=flat-square" alt="0.893 best"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.857-3B6EA8?style=flat-square" alt="0.857 best"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.774-3B6EA8?style=flat-square" alt="0.774 best"></td>
+  <td align="center"><img src="https://img.shields.io/badge/3-3B6EA8?style=flat-square" alt="3 best"></td>
+  <td align="center"><img src="https://img.shields.io/badge/89-3B6EA8?style=flat-square" alt="89 best"></td>
+</tr>
+<tr>
+  <td><b>Agglomerative</b> <sub>ward, k = 3</sub></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.885-7A7A7A?style=flat-square" alt="0.885"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.856-7A7A7A?style=flat-square" alt="0.856"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0.678-C04040?style=flat-square" alt="0.678 lowest"></td>
+  <td align="center"><img src="https://img.shields.io/badge/3-7A7A7A?style=flat-square" alt="3"></td>
+  <td align="center"><img src="https://img.shields.io/badge/0-C04040?style=flat-square" alt="0 none detected"></td>
+</tr>
+</table>
+
+<sub>Blue = best in column &middot; Red = notably weaker cell &middot; values from <code>results/metrics.json</code></sub>
 
 ### 1. Side-by-side panels — ground truth vs. each algorithm
 
