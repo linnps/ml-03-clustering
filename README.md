@@ -13,6 +13,10 @@
 
 ---
 
+<p align="center">
+  <a href="https://linnps.github.io/ml-03-clustering/"><img src="https://img.shields.io/badge/View_Live_Dashboard-0E2841?style=for-the-badge&amp;logo=githubpages&amp;logoColor=white" alt="View live dashboard"></a>
+</p>
+
 ## At a glance
 
 > Cluster a 2-D dataset that mixes two round Gaussian blobs, one **elongated anisotropic blob** that breaks K-means' equal-axis assumption, and a sparse band of **uniform-noise outliers**. Score against the ground-truth labels with Adjusted Rand Index — a luxury real unsupervised tasks don't give you.
